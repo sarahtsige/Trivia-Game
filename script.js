@@ -1,9 +1,17 @@
-console.log('hello!')
+let url = 'https://opentdb.com/api.php?amount=30&category=9&difficulty=easy&type=multiple"
 
-let alphabets = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-'t', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-let word = "Hello"
-word.split(, 10);
+
+
+fetch(url)
+
+
+
+//round()
+//populate the question to the question div
+//randomly populate answers to the answers divs...correct answer cannot be in the same div each time
+///compare answer provided to the correct answer
+//if correct give player 50 points and display the next button
+//if not correct 
+
 
