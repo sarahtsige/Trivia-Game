@@ -1,14 +1,30 @@
-let url = 'https://opentdb.com/api.php?amount=30&category=9&difficulty=easy&type=multiple'
+let url = 'https://opentdb.com/api.php?amount=30&category=9&difficulty=medium&type=multiple'
+let startButton = document.getElementById('start-btn')
+let questionContainer = document.getElementById("question-container")
+let question = document.getElementById('question')
 
+
+startButton.addEventListener('click', startGame)
 let score=0
 
 fetch(url)
-.then(res => {
-    console.log("success!", res);
-})
-.catch(err => {
-    console.log("something went wrong", err)
-})
+.then(res => res.json())
+.then(res => console.log("success!", res))
+.catch(err => console.log("something went wrong", err));
+
+
+
+function startGame() {
+    console.log('game started!')
+    startButton.classList.add('hide')
+    questionContainer.classList.remove('hide')
+    nextQuestion()
+}
+
+function nextQuestion() {}
+
+function checkAnswer() {}
+
 
 
 //round()
@@ -19,18 +35,19 @@ fetch(url)
 //if not correct 
 
 
-// function getGameInfo() {
+function getGameInfo() {
 //     //fetch game data
-//     return fetch(url)
+    return fetch(url)
 //     //convert data to JSON
-//       .then(res => res.json())
+      .then(res => res.json())
 //     //push data to function populateData
-//      // .then(data => populateData())
+     .then(data => populateQuestion(data))
 //      .then(console.log(res.json()))
-// }
+}
 
 
-// function populateData(){
-//     //once data is pulled from the API, put data in correct divs
-// }
+function populateQuestion(){
+    //once data is pulled from the API, put data in correct divs
+    question.innerHTML = data[0].question;
+}
 
