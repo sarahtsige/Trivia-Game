@@ -15,6 +15,7 @@ body {
     background-image: url('blueprint.jpg');
     background-size: cover;
     font-size: 30px;
+    color: blanchedalmond;
 }
 
 body.correct {
