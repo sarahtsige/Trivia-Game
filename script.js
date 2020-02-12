@@ -46,8 +46,23 @@ function getGameInfo() {
 }
 
 
-function populateQuestion(){
+function populateQuestion(data){
     //once data is pulled from the API, put data in correct divs
     question.innerHTML = data[0].question;
 }
 
+
+
+
+
+//sample question:
+let questions = [
+    {question: "Virgin Trains, Virgin Atlantic and Virgin Racing, are all companies owned by which famous entrepreneur?",
+    answers: [
+        {text:"Richard Branson", correct:true},
+        {text:"Alan Sugar", correct:false},
+        {text:'Donald Trump', coorect: false},
+        {text:'Bill Gates', coorect: false}
+    ]
+}
+]
