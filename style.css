@@ -1,11 +1,10 @@
 
-*, *::before, *::after {
+/* *, *::before, *::after {
     box-sizing: border-box;
     font-family: 'Josefin Sans', sans-serif;
-}
+} */
 
 body {
-    --hue: var(--hue-neutral);
     padding: 0;
     margin: 0;
     display: flex;
@@ -26,13 +25,19 @@ body.wrong {
 
 }
 
+header{
+    margin-bottom: 600px;
+}
+
 .container{
     width: 600px;
     max-with: 80%;
-    background-color: rgb(160, 160, 160);
+    height: 400px;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 0 10px 3px;
+    border-top:10px solid black;
+    border-radius: 25px;
 
 }
 
@@ -45,10 +50,10 @@ body.wrong {
 
 .btn {
     border: 1px solid rgb(99, 94, 94);
-    background-color: rgb(99, 94, 94);
+    background-color: white;
     border-radius: 5px;
     padding: 8px 10px;
-    color: white;
+    color: black;
     outline: none;
 
 }
