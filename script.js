@@ -2,12 +2,15 @@ let url = 'https://opentdb.com/api.php?amount=30&category=9&difficulty=medium&ty
 let startButton = document.getElementById('start-btn')
 let questionContainer = document.getElementById("question-container")
 let question = document.getElementById('question')
+let answerDiv = document.getElementById('answer-buttons')
 let answerButtons = document.querySelectorAll('.answer-btn')
 let nextButton = document.getElementById('next-btn')
-let answer1 = document.getElementById('ans1')
-let answer2 = document.getElementById('ans2')
-let answer3 = document.getElementById('ans3')
-let answer4 = document.getElementById('ans4')
+let answer1 = document.getElementById('0')
+let answer2 = document.getElementById('1')
+let answer3 = document.getElementById('2')
+let answer4 = document.getElementById('3')
+
+let score = 0
 
 
 
@@ -16,25 +19,16 @@ startButton.addEventListener('click', startGame)
 
 function startGame() {
     console.log('game started!')
+    //hide start button
     startButton.classList.add('hide')
+    //show question 
     questionContainer.classList.remove('hide')
     //shuffledQuestions = questions.sort(() => Math.random() - .5);
     questionIndex = 0
     showQuestion()
-    checkAnswer()
     nextQuestion()
 }
 
-function nextQuestion() {
-    //showQuestion(shuffledQuestions[questionIndex])
-}
-
-function checkAnswer() {
-    //if clicked button 
-}
-
-
-//function checkAnswer() {}
 
 
 
@@ -46,29 +40,42 @@ function checkAnswer() {
 //if not correct 
 
 
-// let sampleQuestion = 
-//     {question: "Virgin Trains, Virgin Atlantic and Virgin Racing, are all companies owned by which famous entrepreneur?",
-//     answers: [
-//         {text:"Richard Branson", correct:true, value:50},
-//         {text:"Alan Sugar", correct:false, value:0},
-//         {text:'Donald Trump', correct:false, value:0},
-//         {text:'Bill Gates', correct:false, value:0}
-//     ]}
-
-
-
 
 function showQuestion(){
     //populate question from questions array
     question.innerText = questions[0].question;
     //answerButtons.forEach(element => element.innerText = sampleQuestion.answers[0])
-    answer1.innerHTML =  questions[0].answers[0].text
-    answer2.innerHTML =  questions[0].answers[1].text
-    answer3.innerHTML =  questions[0].answers[2].text
-    answer4.innerHTML =  questions[0].answers[3].text
-
+    answer1.innerHTML =  questions[0].answers[0].text;
+    answer2.innerHTML =  questions[0].answers[1].text;
+    answer3.innerHTML =  questions[0].answers[2].text;
+    answer4.innerHTML =  questions[0].answers[3].text;
+    answerDiv.addEventListener('click', checkAnswer)
 }
 
+
+
+function nextQuestion() {
+    //showQuestion(shuffledQuestions[questionIndex])
+}
+
+function checkAnswer(e) {
+    console.log('answer clicked!')
+    //identify which button was clicked
+    if (e.target !== e.currentTarget) {
+        let clickedItem = e.target.id;
+     // take id of clicked item and check the correct key value (true or false) = 
+     if (questions[0].answers[clickedItem].correct == true){
+         console.log("That's Right");
+         e.target.style.backgroundColor = 'green';
+        score += score + 50;
+        //if clicked item is the wrong answer, turn background red
+     } else {
+         console.log("sorry, that's incorrect")
+         e.target.style.backgroundColor = 'red';
+     }
+    }  nextButton.classList.remove('hide');
+    //if clicked button 
+}
 
 
 
