@@ -11,6 +11,7 @@ let answer3 = document.getElementById('2')
 let answer4 = document.getElementById('3')
 
 let score = 0
+let questionIndex = 0
 
 
 
@@ -18,19 +19,14 @@ startButton.addEventListener('click', startGame)
 
 
 function startGame() {
-    console.log('game started!')
     //hide start button
     startButton.classList.add('hide')
     //show question 
     questionContainer.classList.remove('hide')
     //shuffledQuestions = questions.sort(() => Math.random() - .5);
-    questionIndex = 0
     showQuestion()
     nextQuestion()
 }
-
-
-
 
 //round()
 //populate the question to the question div
@@ -39,23 +35,28 @@ function startGame() {
 //if correct give player 50 points and display the next button
 //if not correct 
 
-
-
 function showQuestion(){
     //populate question from questions array
-    question.innerText = questions[0].question;
+    question.innerText = questions[questionIndex].question;
     //answerButtons.forEach(element => element.innerText = sampleQuestion.answers[0])
-    answer1.innerHTML =  questions[0].answers[0].text;
-    answer2.innerHTML =  questions[0].answers[1].text;
-    answer3.innerHTML =  questions[0].answers[2].text;
-    answer4.innerHTML =  questions[0].answers[3].text;
+    answer1.innerHTML =  questions[questionIndex].answers[0].text;
+    answer2.innerHTML =  questions[questionIndex].answers[1].text;
+    answer3.innerHTML =  questions[questionIndex].answers[2].text;
+    answer4.innerHTML =  questions[questionIndex].answers[3].text;
     answerDiv.addEventListener('click', checkAnswer)
 }
 
-
-
 function nextQuestion() {
+    questionIndex += 1
+    showQuestion()
+    reset()
     //showQuestion(shuffledQuestions[questionIndex])
+    //if (){}
+}
+
+function reset(){
+    for (i=0; i<answerButtons.length; i++)
+    answerButtons[i].style.backgroundColor = 'white';
 }
 
 function checkAnswer(e) {
@@ -64,7 +65,7 @@ function checkAnswer(e) {
     if (e.target !== e.currentTarget) {
         let clickedItem = e.target.id;
      // take id of clicked item and check the correct key value (true or false) = 
-     if (questions[0].answers[clickedItem].correct == true){
+     if (questions[questionIndex].answers[clickedItem].correct == true){
          console.log("That's Right");
          e.target.style.backgroundColor = 'green';
         score += score + 50;
@@ -74,6 +75,7 @@ function checkAnswer(e) {
          e.target.style.backgroundColor = 'red';
      }
     }  nextButton.classList.remove('hide');
+    nextButton.addEventListener('click', nextQuestion)
     //if clicked button 
 }
 
