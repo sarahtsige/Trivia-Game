@@ -4,15 +4,13 @@
     font-family: 'Josefin Sans', sans-serif;
 } */
 
+
 body {
     padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
+    margin: 60px;
     height: 100vh;
-    width: 100vw;
     align-items: center;
-    background-image: url('blueprint.jpg');
+    background-image: url(blueprint.jpg);
     background-size: cover;
     font-size: 30px;
     color: blanchedalmond;
@@ -26,37 +24,37 @@ body.wrong {
 
 }
 
-header{
-    margin-bottom: 600px;
+header {
+    margin-bottom: 100px;
+    text-align: center;
+    border-bottom: solid 3px white;
+    padding: 10px;
 }
 
 .container{
-    width: 600px;
-    max-with: 80%;
     height: 400px;
-    border-radius: 5px;
     padding: 10px;
     box-shadow: 0 0 10px 3px;
-    border-top:10px solid black;
+    border-top:10px solid white;
     border-radius: 25px;
-
 }
 
 .btn-grid{
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: 15px;
-    margin: 30px, 0;
+    margin: 30px;
 }
 
 .btn {
     border: 1px solid rgb(99, 94, 94);
     background-color: white;
-    border-radius: 5px;
-    padding: 8px 10px;
+    border-radius: 10px;
     color: black;
     outline: none;
-
+    width: 400px;
+    height: 50px;
+    font-size: 20px;
 }
 
 .btn:hover{
@@ -73,8 +71,7 @@ header{
 
 .start-btn, .next-btn {
     font-size: 40px;
-   font-weight: bold;
-   padding: 10px 20px;
+    font-weight: bold;
 }
 
 .controls {
@@ -88,3 +85,17 @@ header{
     display: none;
 }
 
+#question {
+    margin-bottom: 50px;
+}
+
+
+#question-container {
+    text-align: center;
+}
+
+#score {
+    text-align: center;
+    margin: 20px;
+    color: black;
+}

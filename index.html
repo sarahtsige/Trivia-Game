@@ -5,32 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
-    <title>Random Trivia</title>
+    <title>Random Trivia</title>    
+    <script src='./script.js' defer></script>
 </head>
+
 <body>
-<header>General Knowledge Trivia</header>
-
-<div class="container">
-<div id="question-container" class="hide">
-<div id="question">Question</div>
-<div id="answer-buttons" class="btn-grid">
-    <button class="btn answer-btn" id='0'>Answer 1</button>
-    <button class="btn answer-btn" id='1'>Answer 2</button>
-    <button class="btn answer-btn" id='2'>Answer 3</button>
-    <button class="btn answer-btn" id='3'>Answer 4</button>
-</div>
-</div>
-<div class="controls">
-    <button id="start-btn" class="start-btn btn">Start</button>
-    <button id="next-btn" class="next-btn btn hide">Next</button>
-</div>
-</div>
-
-
-
-</div>
-<script src='./script.js' defer></script>
-</div>
-<script> </script>
+    <header>Quiz</header>
+    <div class="container">
+        <div id="question-container" class="hide">
+            <div id="question">Question</div>
+            <div id="answer-buttons" class="btn-grid">
+                <button class="btn answer-btn" id='0'>Answer 1</button>
+                <button class="btn answer-btn" id='1'>Answer 2</button>
+                <button class="btn answer-btn" id='2'>Answer 3</button>
+                <button class="btn answer-btn" id='3'>Answer 4</button>
+            </div>
+        </div>
+        <div class="controls">
+            <button id="start-btn" class="start-btn btn">Start</button>
+            <button id="next-btn" class="next-btn btn hide">Next</button>
+        </div>
+    </div>
+    <footer>
+        <div id="score">Score: </div>
+    </footer>
 </body>
 </html>

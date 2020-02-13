@@ -10,6 +10,7 @@ let answer2 = document.getElementById('1')
 let answer3 = document.getElementById('2')
 let answer4 = document.getElementById('3')
 
+
 let score = 0
 let questionIndex = 0
 
@@ -18,15 +19,6 @@ let questionIndex = 0
 startButton.addEventListener('click', startGame)
 
 
-function startGame() {
-    //hide start button
-    startButton.classList.add('hide')
-    //show question 
-    questionContainer.classList.remove('hide')
-    //shuffledQuestions = questions.sort(() => Math.random() - .5);
-    showQuestion()
-    nextQuestion()
-}
 
 //round()
 //populate the question to the question div
@@ -47,11 +39,16 @@ function showQuestion(){
 }
 
 function nextQuestion() {
+    console.log(questionIndex)
     questionIndex += 1
-    showQuestion()
-    reset()
-    //showQuestion(shuffledQuestions[questionIndex])
-    //if (){}
+    if (questionIndex < questions.length) {
+        showQuestion()
+        reset()
+    } else  {
+        nextButton.classList.add('hide');
+
+        console.log(score)
+    }
 }
 
 function reset(){
@@ -68,7 +65,7 @@ function checkAnswer(e) {
      if (questions[questionIndex].answers[clickedItem].correct == true){
          console.log("That's Right");
          e.target.style.backgroundColor = 'green';
-        score += score + 50;
+        score += 50;
         //if clicked item is the wrong answer, turn background red
      } else {
          console.log("sorry, that's incorrect")
@@ -77,6 +74,20 @@ function checkAnswer(e) {
     }  nextButton.classList.remove('hide');
     nextButton.addEventListener('click', nextQuestion)
     //if clicked button 
+}
+
+
+
+
+
+function startGame() {
+    //hide start button
+    startButton.classList.add('hide')
+    //show question 
+    questionContainer.classList.remove('hide')
+    //shuffledQuestions = questions.sort(() => Math.random() - .5);
+    showQuestion()
+    //nextQuestion()
 }
 
 
