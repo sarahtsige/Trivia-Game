@@ -9,15 +9,21 @@ let answer1 = document.getElementById('0')
 let answer2 = document.getElementById('1')
 let answer3 = document.getElementById('2')
 let answer4 = document.getElementById('3')
-
+let scoreContainer = document.getElementById('score');
 
 let score = 0
-let questionIndex = 0
+let questionIndex = 8
 
 
 
 startButton.addEventListener('click', startGame)
 
+answer1.addEventListener('click', checkAnswer)
+answer2.addEventListener('click', checkAnswer)
+answer3.addEventListener('click', checkAnswer)
+answer4.addEventListener('click', checkAnswer)
+
+nextButton.addEventListener('click', nextQuestion)
 
 
 //round()
@@ -35,7 +41,15 @@ function showQuestion(){
     answer2.innerHTML =  questions[questionIndex].answers[1].text;
     answer3.innerHTML =  questions[questionIndex].answers[2].text;
     answer4.innerHTML =  questions[questionIndex].answers[3].text;
-    answerDiv.addEventListener('click', checkAnswer)
+}
+
+function showFinalMessage() {
+    let finalMessage = document.getElementById('final-message');
+    let correctAnswerCount =  document.getElementById('final-message__correct-answer-count');
+    let finalScore = document.getElementById('final-message__final-score');
+    finalScore.innerText = `Your final score is: ${score}`;
+    correctAnswerCount.innerText = `You correctly answered ${score/50} questions out of ${questions.length}`;
+    finalMessage.classList.toggle('hide');
 }
 
 function nextQuestion() {
@@ -46,33 +60,31 @@ function nextQuestion() {
         reset()
     } else  {
         nextButton.classList.add('hide');
-
-        console.log(score)
+        showFinalMessage();
     }
 }
 
 function reset(){
-    for (i=0; i<answerButtons.length; i++)
-    answerButtons[i].style.backgroundColor = 'white';
+    for (i=0; i < answerButtons.length; i++) {
+        answerButtons[i].style.backgroundColor = 'white';
+    }
 }
 
 function checkAnswer(e) {
     console.log('answer clicked!')
-    //identify which button was clicked
-    if (e.target !== e.currentTarget) {
-        let clickedItem = e.target.id;
+    let clickedItem = e.target.id;
      // take id of clicked item and check the correct key value (true or false) = 
      if (questions[questionIndex].answers[clickedItem].correct == true){
          console.log("That's Right");
          e.target.style.backgroundColor = 'green';
         score += 50;
+        scoreContainer.innerText = `Score: ${score}`;
         //if clicked item is the wrong answer, turn background red
      } else {
          console.log("sorry, that's incorrect")
          e.target.style.backgroundColor = 'red';
      }
-    }  nextButton.classList.remove('hide');
-    nextButton.addEventListener('click', nextQuestion)
+    nextButton.classList.remove('hide');
     //if clicked button 
 }
 
@@ -81,6 +93,7 @@ function checkAnswer(e) {
 
 
 function startGame() {
+    scoreContainer.innerText = `Score: ${score}`;
     //hide start button
     startButton.classList.add('hide')
     //show question 
@@ -94,8 +107,40 @@ function startGame() {
 
 
 
+class Question {
+    constructor() {
+        this.question = "";
+        this.answer = "";
+    }
+}
 
 
+class Trivia {
+    constructor() {
+        this.questions = [];
+    }
+
+    init() {
+        
+    }
+
+    startGame () {
+
+    }
+
+    checkAnswer() {
+
+    }
+
+    reset() {
+
+    }
+
+    nextQuestion () {
+
+    }
+
+}
 
 
 

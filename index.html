@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
-    <title>Random Trivia</title>    
+    <title>Random Trivia</title>
     <script src='./script.js' defer></script>
 </head>
 
 <body>
     <header>Quiz</header>
+    <div id="score">Score: </div>
     <div class="container">
         <div id="question-container" class="hide">
             <div id="question">Question</div>
@@ -27,7 +29,12 @@
         </div>
     </div>
     <footer>
-        <div id="score">Score: </div>
+
+        <div id="final-message" class="hide">
+            <p id="final-message__correct-answer-count">You correcly answered</p>
+            <p id="final-message__final-score">Your final score is: </p>
+        </div>
     </footer>
 </body>
+
 </html>
