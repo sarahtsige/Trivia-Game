@@ -5,15 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Blinker&display=swap" rel="stylesheet">
     <title>Random Trivia</title>
     <script src='./script.js' defer></script>
 </head>
 
 <body>
-    <header>Quiz</header>
-    <div id="score">Score: </div>
+    <header>Trivia Game</header>
+    <nav>
+        <ul>
+            <li>Test Your Knowlege of Random Facts...</li>
+        </ul>
+    </nav>
+    <div id="score">Your Score: </div>
     <div class="container">
+        <div id="welcome"> 
+            <img src="brain.png">
+            <p>Answer these trivia questions to test your knowlege of random facts.  Each corretly answered question earns you 50 points.  Press start and lets begin, lets see how smart you are!</p>
+        </div>
         <div id="question-container" class="hide">
             <div id="question">Question</div>
             <div id="answer-buttons" class="btn-grid">

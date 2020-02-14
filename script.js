@@ -12,7 +12,7 @@ let answer4 = document.getElementById('3')
 let scoreContainer = document.getElementById('score');
 
 let score = 0
-let questionIndex = 8
+let questionIndex = 7
 
 
 
@@ -76,13 +76,13 @@ function checkAnswer(e) {
      // take id of clicked item and check the correct key value (true or false) = 
      if (questions[questionIndex].answers[clickedItem].correct == true){
          console.log("That's Right");
-         e.target.style.backgroundColor = 'green';
+         e.target.style.backgroundColor = '#99ff99';
         score += 50;
         scoreContainer.innerText = `Score: ${score}`;
         //if clicked item is the wrong answer, turn background red
      } else {
          console.log("sorry, that's incorrect")
-         e.target.style.backgroundColor = 'red';
+         e.target.style.backgroundColor = '#FF9999';
      }
     nextButton.classList.remove('hide');
     //if clicked button 
@@ -106,7 +106,11 @@ function startGame() {
 
 
 
-
+/**
+ * <p>
+ *  Question represents the trivia questions disaplayed to the user/player
+ * </p>
+ */
 class Question {
     constructor() {
         this.question = "";
@@ -120,7 +124,11 @@ class Trivia {
         this.questions = [];
     }
 
-    init() {
+    /**
+     * 
+     * @param {int} x is the number of questions 
+     */
+    init(x) {
         
     }
 
@@ -141,9 +149,6 @@ class Trivia {
     }
 
 }
-
-
-
 
 
 
