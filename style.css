@@ -16,7 +16,7 @@ body {
 header {
     text-align: center;
     border-bottom: solid 3px darkgrey;
-    font-size: 50px;
+    font-size: 60px;
     color: rgb(46, 46, 46);
     margin-top: -50px;
     font-family: 'Anton', sans-serif;
@@ -90,6 +90,7 @@ li{
     align-items: center;
     margin-top: 30px;
     font-family: 'Blinker', sans-serif;
+    margin-bottom: 75px;
 }
 
 .hide {
