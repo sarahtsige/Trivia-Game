@@ -39,6 +39,7 @@ class Trivia {
         this.answer3 = document.getElementById('2')
         this.answer4 = document.getElementById('3')
         this.scoreContainer = document.getElementById('score');
+        this.correctAnswer = document.getElementById("correct-answer");
         this.questions = this.generateQuestions();
         this.questionIndex = 0;
         this.score = 0;
@@ -76,9 +77,11 @@ class Trivia {
             this.score += 50;
             this.scoreContainer.innerText = `Score: ${this.score}`;
             //if clicked item is the wrong answer, turn background red
+            this.correctAnswer.innerHTML = "Correct!"
         } else {
             console.log("sorry, that's incorrect")
             e.target.style.backgroundColor = '#FF9999';
+            this.correctAnswer.innerHTML = "Sorry...wrong answer."
         }
         this.nextButton.classList.remove('hide');
         this.questionIndex += 1
@@ -87,6 +90,7 @@ class Trivia {
     reset() {
         for (let i = 0; i < this.answerButtons.length; i++) {
             this.answerButtons[i].style.backgroundColor = 'white';
+            this.correctAnswer.innerHTML = ""
         }
 
     }
@@ -114,6 +118,8 @@ class Trivia {
             this.nextButton.classList.add('hide');
             this.questionContainer.classList.add('hide')
             this.showFinalMessage();
+            let restart = document.getElementById("restart-btn");
+            restart.classList.remove('hide');
         }
 
     }

@@ -6,7 +6,6 @@ body {
     height: 100vh;
     align-items: center;
     background-image: url(daylight-environment-forest-idyllic-459225.jpg); 
-    /* background-image: url(moutain.jpg);  */
     background-size: cover;
     font-size: 25px;
     color: #2B3365;
@@ -44,9 +43,8 @@ li{
     box-shadow: 0 0 10px 3px;
     border-radius: 25px;
     background-color: rgb(211, 211, 211, 0.9);
-  
-
-    
+    width: 80%;
+    margin: 0 auto;
 }
 
 .btn-grid{
@@ -110,4 +108,9 @@ li{
 #score {
     text-align: center;
     margin: 10px;
+}
+
+#correct-answer {
+    margin-top: 15px;
+    font-weight: bold;
 }
