@@ -1,111 +1,3 @@
-let url = 'https://opentdb.com/api.php?amount=30&category=9&difficulty=medium&type=multiple'
-let startButton = document.getElementById('start-btn')
-let questionContainer = document.getElementById("question-container")
-let question = document.getElementById('question')
-let answerDiv = document.getElementById('answer-buttons')
-let answerButtons = document.querySelectorAll('.answer-btn')
-let nextButton = document.getElementById('next-btn')
-let answer1 = document.getElementById('0')
-let answer2 = document.getElementById('1')
-let answer3 = document.getElementById('2')
-let answer4 = document.getElementById('3')
-let scoreContainer = document.getElementById('score');
-
-let score = 0
-let questionIndex = 7
-
-
-
-startButton.addEventListener('click', startGame)
-
-answer1.addEventListener('click', checkAnswer)
-answer2.addEventListener('click', checkAnswer)
-answer3.addEventListener('click', checkAnswer)
-answer4.addEventListener('click', checkAnswer)
-
-nextButton.addEventListener('click', nextQuestion)
-
-
-//round()
-//populate the question to the question div
-//randomly populate answers to the answers divs...correct answer cannot be in the same div each time
-///compare answer provided to the correct answer
-//if correct give player 50 points and display the next button
-//if not correct 
-
-function showQuestion() {
-    //populate question from questions array
-    question.innerText = questions[questionIndex].question;
-    //answerButtons.forEach(element => element.innerText = sampleQuestion.answers[0])
-    answer1.innerHTML = questions[questionIndex].answers[0].text;
-    answer2.innerHTML = questions[questionIndex].answers[1].text;
-    answer3.innerHTML = questions[questionIndex].answers[2].text;
-    answer4.innerHTML = questions[questionIndex].answers[3].text;
-}
-
-function showFinalMessage() {
-    let finalMessage = document.getElementById('final-message');
-    let correctAnswerCount = document.getElementById('final-message__correct-answer-count');
-    let finalScore = document.getElementById('final-message__final-score');
-    finalScore.innerText = `Your final score is: ${score}`;
-    correctAnswerCount.innerText = `You correctly answered ${score / 50} questions out of ${questions.length}`;
-    finalMessage.classList.toggle('hide');
-}
-
-function nextQuestion() {
-    console.log(questionIndex)
-    questionIndex += 1
-    if (questionIndex < questions.length) {
-        showQuestion()
-        reset()
-    } else {
-        nextButton.classList.add('hide');
-        showFinalMessage();
-    }
-}
-
-function reset() {
-    for (i = 0; i < answerButtons.length; i++) {
-        answerButtons[i].style.backgroundColor = 'white';
-    }
-}
-
-function checkAnswer(e) {
-    console.log('answer clicked!')
-    let clickedItem = e.target.id;
-    // take id of clicked item and check the correct key value (true or false) = 
-    if (questions[questionIndex].answers[clickedItem].correct == true) {
-        console.log("That's Right");
-        e.target.style.backgroundColor = '#99ff99';
-        score += 50;
-        scoreContainer.innerText = `Score: ${score}`;
-        //if clicked item is the wrong answer, turn background red
-    } else {
-        console.log("sorry, that's incorrect")
-        e.target.style.backgroundColor = '#FF9999';
-    }
-    nextButton.classList.remove('hide');
-    //if clicked button 
-}
-
-
-
-
-
-function startGame() {
-    scoreContainer.innerText = `Score: ${score}`;
-    //hide start button
-    startButton.classList.add('hide')
-    //show question 
-    questionContainer.classList.remove('hide')
-    //shuffledQuestions = questions.sort(() => Math.random() - .5);
-    showQuestion()
-    //nextQuestion()
-}
-
-
-
-
 /**
  * <p>
  *  Question represents the trivia questions disaplayed to the user/player
@@ -117,49 +9,117 @@ class Question {
         this.answers = answers
     }
 
-    getAnswer() {
-        for (let i = 0; i < this.answers.length; i++) {
-            if (this.answers[i].correct == true)
-                return this.answers[i].text;
-        }
+    getAnswer(index) {
+        return this.answers[index].correct;
     }
 
+    getAnswers() {
+        return this.answers;
+    }
+
+    getQuestion() {
+        return this.question;
+    }
 }
 
-
-
-
+/**
+ * Represents the trivia game
+ */
 class Trivia {
     constructor() {
-        this.questions = [];
+        this.startButton = document.getElementById('start-btn')
+        this.questionContainer = document.getElementById("question-container")
+        this.question = document.getElementById('question')
+        this.answerDiv = document.getElementById('answer-buttons')
+        this.answerButtons = document.querySelectorAll('.answer-btn')
+        this.nextButton = document.getElementById('next-btn')
+        this.welcome = document.getElementById('welcome')
+        this.answer1 = document.getElementById('0')
+        this.answer2 = document.getElementById('1')
+        this.answer3 = document.getElementById('2')
+        this.answer4 = document.getElementById('3')
+        this.scoreContainer = document.getElementById('score');
+        this.questions = this.generateQuestions();
+        this.questionIndex = 0;
+        this.score = 0;
+        this.init();
     }
 
-    /**
-     * 
-     * @param {int} x is the number of questions 
-     */
-    init(x) {
-
+    generateQuestions() {
+        return this.questions;
     }
 
-    startGame() {
-
+    startGame = () => {
+        this.scoreContainer.innerText = `Score: ${this.score}`;
+        //hide start button
+        this.startButton.classList.add('hide')
+        this.welcome.classList.add('hide')
+        //show question 
+        this.questionContainer.classList.remove('hide')
+        this.nextQuestion()
     }
 
-    checkAnswer() {
+    init() {
+        this.startButton.addEventListener('click', this.startGame)
+        this.answer1.addEventListener('click', this.checkAnswer)
+        this.answer2.addEventListener('click', this.checkAnswer)
+        this.answer3.addEventListener('click', this.checkAnswer)
+        this.answer4.addEventListener('click', this.checkAnswer)
+        this.nextButton.addEventListener('click', this.nextQuestion)
+    }
 
+    checkAnswer = e => {
+        let clickedItem = e.target.id;
+        // take id of clicked item and check the correct key value (true or false) = 
+        if (this.questions[this.questionIndex].getAnswer(clickedItem)) {
+            e.target.style.backgroundColor = '#99ff99';
+            this.score += 50;
+            this.scoreContainer.innerText = `Score: ${this.score}`;
+            //if clicked item is the wrong answer, turn background red
+        } else {
+            console.log("sorry, that's incorrect")
+            e.target.style.backgroundColor = '#FF9999';
+        }
+        this.nextButton.classList.remove('hide');
+        this.questionIndex += 1
     }
 
     reset() {
+        for (let i = 0; i < this.answerButtons.length; i++) {
+            this.answerButtons[i].style.backgroundColor = 'white';
+        }
 
     }
 
-    nextQuestion() {
+    showFinalMessage() {
+        let finalMessage = document.getElementById('final-message');
+        let correctAnswerCount = document.getElementById('final-message__correct-answer-count');
+        let finalScore = document.getElementById('final-message__final-score');
+        finalScore.innerText = `Your final score is: ${this.score}`;
+        correctAnswerCount.innerText = `You correctly answered ${this.score / 50} questions out of ${this.questions.length}`;
+        finalMessage.classList.toggle('hide');
+    }
+
+    nextQuestion = () => {
+        if (this.questionIndex < this.questions.length) {
+            //populate question from questions array
+            this.question.innerText = this.questions[this.questionIndex].question;
+            //answerButtons.forEach(element => element.innerText = sampleQuestion.answers[0])
+            this.answer1.innerHTML = this.questions[this.questionIndex].getAnswers()[0].text;
+            this.answer2.innerHTML = this.questions[this.questionIndex].getAnswers()[1].text;
+            this.answer3.innerHTML = this.questions[this.questionIndex].getAnswers()[2].text;
+            this.answer4.innerHTML = this.questions[this.questionIndex].getAnswers()[3].text;
+            this.reset()
+        } else {
+            this.nextButton.classList.add('hide');
+            this.questionContainer.classList.add('hide')
+            this.showFinalMessage();
+        }
 
     }
 
-    generateQuestions(){
-        questions = [new Question("Virgin Trains, Virgin Atlantic and Virgin Racing, are all companies owned by which famous entrepreneur?", [
+    generateQuestions() {
+        return [new Question("Virgin Trains, Virgin Atlantic and Virgin Racing, are all companies owned by which famous entrepreneur?", [
             { text: "Richard Branson", correct: true, value: 50 },
             { text: "Alan Sugar", correct: false, value: 0 },
             { text: 'Donald Trump', correct: false, value: 0 },
@@ -178,10 +138,10 @@ class Trivia {
             { text: "Pancreatic", correct: true, value: 50 }
         ]),
         new Question("What was the original name of the search engine 'Google'?", [
-            { text: "Bone", correct: false, value: 0 },
-            { text: "Liver", correct: false, value: 0 },
-            { text: "Stomach", correct: false, value: 0 },
-            { text: "Pancreatic", correct: true, value: 50 }
+            { text: "CatMassage", correct: false, value: 0 },
+            { text: "BackRub", correct: true, value: 50 },
+            { text: "SearchPro", correct: false, value: 0 },
+            { text: "Netscape Navigator", correct: false, value: 0 }
         ]),
         new Question("What character was once considered to be the 27th letter of the alphabet?", [
             { text: "Interrobang", correct: false, value: 0 },
@@ -223,115 +183,4 @@ class Trivia {
 
 }
 
-
-
-
-
-
-// let q1 = new Question("Virgin Trains, Virgin Atlantic and Virgin Racing, are all companies owned by which famous entrepreneur?", [
-//     { text: "Richard Branson", correct: true, value: 50 },
-//     { text: "Alan Sugar", correct: false, value: 0 },
-//     { text: 'Donald Trump', correct: false, value: 0 },
-//     { text: 'Bill Gates', correct: false, value: 0 }
-// ])
-
-
-
-
-
-//Trivia question:
-let questions = [
-    // {
-    //     question: "Virgin Trains, Virgin Atlantic and Virgin Racing, are all companies owned by which famous entrepreneur?",
-    //     answers: [
-    //         { text: "Richard Branson", correct: true, value: 50 },
-    //         { text: "Alan Sugar", correct: false, value: 0 },
-    //         { text: 'Donald Trump', correct: false, value: 0 },
-    //         { text: 'Bill Gates', correct: false, value: 0 }
-    //     ]
-    // },
-    // {
-    //     question: "Scotch whisky and Drambuie make up which cocktail?",
-    //     answers: [
-    //         { text: "Screwdriver", correct: false, value: 0 },
-    //         { text: "Manhattan", correct: false, value: 0 },
-    //         { text: "Rusty Nail", correct: true, value: 50 },
-    //         { text: "Sex on the Beach", correct: false, value: 0 }
-    //     ]
-    // },
-    // {
-    //     question: "Apple co-founder Steve Jobs died from complications of which form of cancer?",
-    //     answers: [
-    //         { text: "Bone", correct: false, value: 0 },
-    //         { text: "Liver", correct: false, value: 0 },
-    //         { text: "Stomach", correct: false, value: 0 },
-    //         { text: "Pancreatic", correct: true, value: 50 }
-    //     ]
-    // },
-    // {
-    //     question: "What was the original name of the search engine 'Google'?",
-    //     answers: [
-    //         { text: "CatMassage", correct: false, value: 0 },
-    //         { text: "BackRub", correct: true, value: 50 },
-    //         { text: "SearchPro", correct: false, value: 0 },
-    //         { text: "Netscape Navigator", correct: false, value: 0 }
-    //     ]
-    // },
-    // {
-    //     question: "What character was once considered to be the 27th letter of the alphabet?",
-    //     answers: [
-    //         { text: "Interrobang", correct: false, value: 0 },
-    //         { text: "Tilde", correct: false, value: 0 },
-    //         { text: "Pilcrow", correct: false, value: 0 },
-    //         { text: 'Ampersand', correct: true, value: 50 }
-    //     ]
-    // // },
-    // {
-    //     question: "In what year was McDonald's founded?",
-    //     answers: [
-    //         { text: "1955", correct: true, value: 50 },
-    //         { text: "1964", correct: false, value: 0 },
-    //         { text: "1951", correct: false, value: 0 },
-    //         { text: "1947", correct: false, value: 0 }
-    //     ]
-    // },
-    // {
-    //     question: "What is the largest organ of the human body?",
-    //     answers: [
-    //         { text: "Heart", correct: false, value: 0 },
-    //         { text: "Skin", correct: true, value: 50 },
-    //         { text: "Large Intestine", correct: false, value: 0 },
-    //         { text: "Liver", correct: false, value: 0 }
-    //     ]
-//     // },
-//     {
-//         question: "What alcoholic drink is made from molasses?",
-//         answers: [
-//             { text: "Gin", correct: false, value: 0 },
-//             { text: "Vodka", correct: false, value: 0 },
-//             { text: "Rum", correct: true, value: 50 },
-//             { text: "Whisky", correct: false, value: 0 }
-//         ]
-//     },
-//     {
-//         question: "How tall is the Burj Khalifa?",
-//         answers: [
-//             { text: "2,722 ft", correct: true, value: 50 },
-//             { text: "2,717 ft", correct: false, value: 0 },
-//             { text: "2,546 ft", correct: false, value: 0 },
-//             { text: "3,024 ft", correct: false, value: 0 }
-//         ]
-//     },
-//     {
-//         question: "Which country, not including Japan, has the most people of japanese decent?",
-//         answers: [
-//             { text: "China", correct: false, value: 0 },
-//             { text: "Brazil", correct: true, value: 50 },
-//             { text: "South Korea", correct: false, value: 0 },
-//             { text: "United States of America", correct: false, value: 0 }
-//         ]
-//     }
-// ]
-
-
-
+const game = new Trivia();
