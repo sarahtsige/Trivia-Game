@@ -19,7 +19,7 @@ header {
     font-size: 60px;
     color: #2B3365;
     margin-top: -50px;
-    font-weight: bold;
+    font-weight: bolder;
 
 }
 
@@ -89,7 +89,7 @@ li{
     justify-content: center;
     align-items: center;
     margin-top: 30px;
-    margin-bottom: 75px;
+    margin-bottom: 30px;
 }
 
 .hide {
